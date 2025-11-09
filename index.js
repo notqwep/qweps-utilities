@@ -91,6 +91,20 @@ client.on('messageCreate', async (message) => {
             .catch(err => console.error('Error deleting messages:', err));
     }
 
+    // q.say
+    if (command === 'say') {
+        const text = args.join(' '); // Combines all arguments into one string
+        if (!text) return; // Ignores the command if the user didn't type anything
+
+        try {
+            await message.delete(); // Deletes the q.say command message
+            await message.channel.send(text); // If the user types something on the <text> argument, the bot will send the message
+        } catch (error) {
+            console.error('Cannot execute q.say command:', error);
+        }
+        return;
+    }
+
     // q.the
     if (command === 'the') {
         await message.delete();
