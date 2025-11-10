@@ -62,7 +62,7 @@ client.on('messageCreate', async (message) => {
         await message.delete();
 
         // Confirmation message
-        await message.channel.send(`Beaned **${target.username}** (${target.id}). | Case ID \`69420\``);
+        await message.channel.send(`Beaned ${target.user} (${target.id}). | Case ID \`69420\``);
 
         // Wait for the beaned user's next message
         const filter = m => m.author.id === target.id;
@@ -109,6 +109,32 @@ client.on('messageCreate', async (message) => {
     if (command === 'the') {
         await message.delete();
         message.channel.send('the');
+    }
+
+    // q.watermelon
+    if (command === 'watermelon') {
+        await message.delete().catch(console.error); // Deletes the command itself
+
+        // Get the mentioned user
+        const target = message.mentions.members.first();
+        if (!target) return message.channel.send('You must mention a user to watermelon.');
+
+        try {
+            // Change the user's nickname to "watermelon"
+            await target.setNickname('watermelon');
+            message.channel.send(`Watermeloned ${target.user} (${target.id}). | Case ID \`69420\``);
+
+            // Wait for the watermeloned user's next message
+            const filter = (m) => m.author.id === target.id;
+            const collector = message.channel.createMessageCollector({ filter, max: 1 });
+
+            collector.on('collect', async (msg) => {
+                await msg.react('🍉');
+            });
+        } catch (error) {
+            console.error('Cannot execute q.watermelon:', error);
+            message.channel.send(`Failed to watermelon ${target.user}.`);
+        }
     }
 });
 
