@@ -122,7 +122,7 @@ client.on('messageCreate', async (message) => {
         try {
             // Change the user's nickname to "watermelon"
             await target.setNickname('watermelon');
-            message.channel.send(`Watermeloned **${target.username}** (${target.id}). | Case ID \`69420\``);
+            message.channel.send(`Watermeloned **${target.user.username}** (${target.id}). | Case ID \`69420\``);
 
             // Wait for the watermeloned user's next message
             const filter = (m) => m.author.id === target.id;
@@ -133,7 +133,7 @@ client.on('messageCreate', async (message) => {
             });
         } catch (error) {
             console.error('Cannot execute q.watermelon:', error);
-            message.channel.send(`Failed to watermelon **${target.username}**.`);
+            message.channel.send(`Failed to watermelon **${target.user.username}**.`);
         }
     }
 });
