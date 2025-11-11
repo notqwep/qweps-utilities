@@ -1,6 +1,7 @@
 {
   "name": "qweps-utilities",
-  "version": "1.0.0",
+  "version": "25.0",
+  "build": "29401",
   "description": "",
   "main": "index.js",
   "scripts": {
