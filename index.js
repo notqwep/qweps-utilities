@@ -73,6 +73,44 @@ client.on('messageCreate', async (message) => {
         });
     }
 
+    // q.message
+    if (command === 'message') {
+        // q.message <user> <message>
+
+        const target = message.mentions.members.first();
+        const argsWithoutMention = args.slice(1).join(' ');
+
+        // If no target user was mentioned...
+        if (!target) {
+            return message.reply("You must mention a user to message.");
+        }
+
+        // If a target user was mentioned but the message doesn't contain anything...
+        if (!argsWithoutMention) {
+            return message.reply("You cannot send a blank message.");
+        }
+
+        // If both of the conditions are met (target user mentioned and message contains text)...
+        // Create message embed
+        const { EmbedBuilder } = require('discord.js');
+        const embed = new EmbedBuilder()
+            .setTitle(`${message.author.username} messaged you in ${message.guild.name}.`)
+            .setDescription(argsWithoutMention)
+            .setColor('#0060FF');
+
+        // Attempt to message the user
+        target.send({ embeds: [embed] })
+            .then(() => {
+                message.reply("Message delivered."); // This reply does not ping the source user
+            })
+            .catch(err => {
+                console.error("Message not delivered:", err); // Error shown on the terminal
+                message.reply("**Your message was not delivered.** The user has either turned off direct messages from this server, changed their privacy settings, or has blocked me."); // What the bot replies when it cannot message the target user
+            });
+
+        return;
+    }
+
     // q.ping
     if (command === 'ping') {
         const sent = await message.channel.send('Pinging...');
