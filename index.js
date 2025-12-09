@@ -21,6 +21,9 @@ const textChannelId = '1423485691593097238';
 const guildId = '1423485690431406243';
 const voiceChannelId = '1423485691593097239';
 
+// Slash Command Handler
+require('./handlers/slashHandler')(client);
+
 // Bot Ready
 client.once('ready', async () => {
     console.log(`Welcome, ${client.user.tag}`);
