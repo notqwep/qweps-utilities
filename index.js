@@ -1,3 +1,5 @@
+console.log('qars is starting up. This may take a few moments...');
+
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { joinVoiceChannel } = require('@discordjs/voice');
 const readline = require('readline');
@@ -180,7 +182,7 @@ client.on('messageCreate', async (message) => {
 });
 
 // Bot Login
-client.login(token);
+client.login(process.env.TOKEN).catch(console.error);
 
 // Keep-alive server (Render & UptimeRobot)
 try {
