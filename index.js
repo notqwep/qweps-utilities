@@ -16,7 +16,7 @@ const client = new Client({
 
 // Configuration
 const prefix = 'q.';
-const token = 'MTQyMDIxNTEyNDUyNTk3NzY2MA.Gk4Xv5.S34zzSSFrqbuOEDwhbTX-Su3R--hYmzBsIBbu4';
+const token = process.env.TOKEN;
 const textChannelId = '1423485691593097238';
 const guildId = '1423485690431406243';
 const voiceChannelId = '1423485691593097239';
