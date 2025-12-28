@@ -99,9 +99,14 @@ client.on('messageCreate', async (message) => {
         // Create message embed
         const { EmbedBuilder } = require('discord.js');
         const embed = new EmbedBuilder()
+            .setAuthor({
+                name: client.user.username,
+                iconURL: client.user.displayAvatarURL()
+            })
             .setTitle(`${message.author.username} messaged you in ${message.guild.name}.`)
             .setDescription(argsWithoutMention)
-            .setColor('#0060FF');
+            .setColor('#0060FF')
+            .setTimestamp();
 
         // Attempt to message the user
         target.send({ embeds: [embed] })
