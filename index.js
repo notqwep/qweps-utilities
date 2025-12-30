@@ -19,9 +19,9 @@ const client = new Client({
 // Configuration
 const prefix = 'q.';
 const token = process.env.TOKEN;
-const textChannelId = '1423485691593097238';
-const guildId = '1423485690431406243';
-const voiceChannelId = '1423485691593097239';
+const textChannelId = '1426656588357177466';
+const guildId = '1138491633126613103';
+const voiceChannelId = '1441078061960400956';
 
 // Slash Command Handler
 require('./handlers/slashHandler')(client);
