@@ -110,10 +110,10 @@ client.on('messageCreate', async (message) => {
 
         // Attempt to message the user
         target.send({ embeds: [embed] })
-            .then(() => {
-                message.reply("Message delivered."); 
+            .then(async () => {
+                await message.reply("Message delivered."); 
             })
-            .catch(err => {
+            .catch(async (err) => {
                 console.error("Message not delivered:", err); // Error shown on the terminal
                 
                 const failEmbed = {
@@ -123,10 +123,14 @@ client.on('messageCreate', async (message) => {
                     timestamp: new Date()
                 };
 
-                message.reply({
-                    embeds: [failEmbed],
-                    allowedMentions: { repliedUser: false }
-                });
+                try {
+                    await message.reply({
+                        embeds: [failEmbed],
+                        allowedMentions: { repliedUser: false }
+                    });
+                }   catch (replyErr) {
+                    console.error('Failed to send error details:', replyErr);
+                }
             });
         return;
     }
