@@ -111,13 +111,23 @@ client.on('messageCreate', async (message) => {
         // Attempt to message the user
         target.send({ embeds: [embed] })
             .then(() => {
-                message.reply("Message delivered."); // This reply does not ping the source user
+                message.reply("Message delivered."); 
             })
             .catch(err => {
                 console.error("Message not delivered:", err); // Error shown on the terminal
-                message.reply("**Your message was not delivered.** The user has either turned off direct messages from this server, changed their privacy settings, or has blocked me."); // What the bot replies when it cannot message the target user
-            });
+                
+                const failEmbed = {
+                    title: 'Message not delivered.',
+                    description: 'The recipient has either turned off direct messages from this server, changed their privacy settings, or the app was blocked by the recipient.',
+                    color: FF0000,
+                    timestamp: new Date()
+                };
 
+                message.reply({
+                    embeds: [failEmbed],
+                    allowedMentions: { repliedUser: false }
+                });
+            });
         return;
     }
 
